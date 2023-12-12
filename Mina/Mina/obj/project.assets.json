@@ -1924,6 +1924,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.14",
       "NetTopologySuite >= 2.5.0",
       "NetTopologySuite.IO.GeoJSON >= 4.0.0",
+      "NetTopologySuite.IO.PostGis >= 2.1.0",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.11",
       "Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite >= 7.0.11",
       "Swashbuckle.AspNetCore >= 6.4.0"
@@ -1936,11 +1937,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Xaliq\\OneDrive\\Documents\\Mina\\Mina\\Mina.csproj",
+      "projectUniqueName": "C:\\Users\\Xaliq\\Desktop\\project\\Mina\\Mina\\Mina.csproj",
       "projectName": "Mina",
-      "projectPath": "C:\\Users\\Xaliq\\OneDrive\\Documents\\Mina\\Mina\\Mina.csproj",
+      "projectPath": "C:\\Users\\Xaliq\\Desktop\\project\\Mina\\Mina\\Mina.csproj",
       "packagesPath": "C:\\Users\\Xaliq\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Xaliq\\OneDrive\\Documents\\Mina\\Mina\\obj\\",
+      "outputPath": "C:\\Users\\Xaliq\\Desktop\\project\\Mina\\Mina\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1999,6 +2000,10 @@
           "NetTopologySuite.IO.GeoJSON": {
             "target": "Package",
             "version": "[4.0.0, )"
+          },
+          "NetTopologySuite.IO.PostGis": {
+            "target": "Package",
+            "version": "[2.1.0, )"
           },
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",

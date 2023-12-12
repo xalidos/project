@@ -15,14 +15,11 @@ namespace Mina.DbContexts
         }
 
         public DbSet<Building> Buildings { get; set; }
-        public DbSet<POI> Poi { get; set; }
+        //public DbSet<POI> Poi { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            //modelBuilder.Entity<Building>()
-            //    .Ignore(e => e.Geometry.UserData);
-
-            base.OnModelCreating(modelBuilder);
+            builder.HasPostgresExtension("postgis");
         }
     }
 }

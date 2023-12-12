@@ -2,6 +2,6 @@
 
 namespace Mina.Repositories;
 
-public interface IPoiRepository : IRepository<POI>
-{
-}
+//public interface IPoiRepository : IRepository<POI>
+//{
+//}

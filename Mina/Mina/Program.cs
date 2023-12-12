@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using Mina.Models;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,9 +25,12 @@ builder.Services.AddDbContext<MinaDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PGDatabase"), o => o.UseNetTopologySuite());
 });
 
+NpgsqlConnection.GlobalTypeMapper.UseNetTopologySuite();
+
+
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IBuildingRepository, BuildingRepository>();
-builder.Services.AddScoped<IPoiRepository, PoiRepository>();
+//builder.Services.AddScoped<IPoiRepository, PoiRepository>();
 builder.Services.AddScoped<IBuildingService, BuildingService>();
 
 builder.Services.AddControllers(options =>

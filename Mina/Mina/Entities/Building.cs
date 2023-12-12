@@ -13,6 +13,7 @@ namespace Mina.Entities
         public new int Id { get; set; }
 
         [Column("geometry", TypeName = "geometry")]
+        //[Column(TypeName = "geometry(Polygon,4326)")]
         public Geometry Geometry { get; set; }
     }
 }

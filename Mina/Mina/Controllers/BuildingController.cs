@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Mina.Models;
 using Mina.Models.BuildingDtos;
 using Mina.Services;
+using NetTopologySuite.Features;
 using NetTopologySuite.Geometries;
-using Newtonsoft.Json.Linq;
+using NetTopologySuite.IO;
 
 namespace Mina.Controllers
 {
@@ -18,45 +18,61 @@ namespace Mina.Controllers
             _buildingService = buildingService;
         }
 
-        [HttpGet]
-        public async Task<List<Geometry>> GetAll()
+        [HttpGet("GetPoint/{id}")]
+        public async Task<Feature> GetPoint(string id)
         {
-            var list = await _buildingService.GetAllAsync();
+            var data = await _buildingService.GetPoint(id);
 
-            return list.Select(x => x.Geometry).ToList();
+            return data;
         }
 
-        [HttpGet("{id}")]
-        public async Task<Geometry> Get(int id)
+        [HttpGet("GetLinestring/{id}")]
+        public async Task<Feature> GetLinestring(string id)
         {
-            var data = await _buildingService.GetByIdAsync(id);
+            var data = await _buildingService.GetLinestring(id);
 
-            return data.Geometry;
+            return data;
+        }
+
+        [HttpGet("GetPolygon/{id}")]
+        public async Task<Feature> GetPolygon(int id)
+        {
+            var data = await _buildingService.GetPolygon(id);
+
+            return data;
+        }
+
+        [HttpGet("GetPointAndPolygon")]
+        public async Task<FeatureCollection> GetPointAndPolygon()
+        {
+            var list = await _buildingService.GetPointAndPolygon();
+
+            return list;
         }
 
 
-        [HttpGet("GetPOI/{id}")]
-        public async Task<List<Geometry>> GetPOI(int id)
+        [HttpPost("AddPoint")]
+        public async Task AddPoint([FromBody] Feature value)
         {
-            return await _buildingService.GetPoiAsync(id);
+            await _buildingService.CheckPoint(value.Geometry);
+
+            await _buildingService.AddPoint(value);
         }
 
-        [HttpPost]
-        public async Task<int> Add([FromBody] CreateBuildingDto value)
+        [HttpPost("AddLinestring")]
+        public async Task AddLinestring([FromBody] Feature value)
         {
-            return await _buildingService.CreateAsync(value);
+            await _buildingService.CheckLinestring(value.Geometry);
+
+            await _buildingService.AddLinestring(value);
         }
 
-        [HttpPut("{id}")]
-        public async Task Update(int id, [FromBody] UpdateBuildingDto value)
+        [HttpPost("AddPolygon")]
+        public async Task AAddPolygon([FromBody] Feature value)
         {
-            await _buildingService.UpdateAsync(id, value);
-        }
+            await _buildingService.CheckPolygon(value.Geometry);
 
-        [HttpDelete("{id}")]
-        public async Task Delete(int id)
-        {
-            await _buildingService.DeleteAsync(id);
+            await _buildingService.AddPolygon(value);
         }
     }
 }
